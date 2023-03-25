@@ -7,12 +7,28 @@
 
 <canvas id="myCanvas" width="500" height="500" image="{{ background }}"></canvas>
 
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Your Highscore</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'receiveScore' %}" method="POST">
+                {% csrf_token %}
+                <div id="score"></div>
+                <div id="levelId"></div>
+                <input type="submit" name="action" value="Submit High Score" data-value="submit" class="btn btn-outline-success"></input>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<form action="{% url 'receiveScore' %}" method="POST">
-    {% csrf_token %}
-    
-    <input type="submit" name="action" value="Submit High Score" data-value="submit" class="btn btn-outline-success"></input>
-</form>
 {% endblock %}
 
 {% block scripts %} 

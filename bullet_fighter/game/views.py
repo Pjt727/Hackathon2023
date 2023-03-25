@@ -1,6 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import Background, SubmitScore
+from .forms import Background
 from image_generator import imageGen
 from django.templatetags.static import static
 
@@ -14,8 +14,7 @@ def play(request: HttpRequest, level: int, id:int) -> HttpRequest:
             background = imageGen.callImageGenerator(theme)
     
     themeForm = Background()
-    submitForm = SubmitScore()
-    return render(request, "play.html", context={'level': level, 'id': id, 'themeForm': themeForm, 'background': background, 'submitForm': submitForm})
+    return render(request, "play.html", context={'level': level, 'id': id, 'themeForm': themeForm, 'background': background})
 
 def receiveScore(request:HttpRequest):
 

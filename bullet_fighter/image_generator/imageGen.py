@@ -5,7 +5,7 @@ import webbrowser
 import openai
 from openai.error import InvalidRequestError
 
-def generate_image(prompt, num_image, size, output_format):
+def generate_image(prompt, num_image, size, output_format='url'):
     """
     params:
         prompt (str):
@@ -32,11 +32,12 @@ def generate_image(prompt, num_image, size, output_format):
         print(e)
 
 def callImageGenerator(theme, imgSize="1024x1024"):
+    theme += " themed top down video game map" 
     config = configparser.ConfigParser()
-    config.read('credential.ini')
-    API_KEY = config['openai']['APIKEY']
+    #config.read('credential.ini')
+    #API_KEY = config['openai']['APIKEY']
 
-    openai.api_key = API_KEY
+    openai.api_key = "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"
 
     # SIZES = ('1024x1024', '512x512', '256x256')
 
@@ -44,15 +45,14 @@ def callImageGenerator(theme, imgSize="1024x1024"):
     # print(theme) 
 
     # generate images (url outputs)
-    # response = generate_image(theme, num_image=1, size=SIZES[0])
-    # response['created']
-    # images = response['images']
-    # for image in images:
-    #     webbrowser.open(image)
+    response = generate_image(theme, num_image=1, size=imgSize)
+    response['created']
+    images = response['images']
+    return images[0]
 
     ## generate images (byte output)
-    response = generate_image(theme, num_image=1, size=imgSize, output_format='b64_json')
-    prefix = 'demo'
-    for indx, image in enumerate(response['images']):
-        with open(f'{prefix}_{indx}.jpg', 'wb') as f:
-            f.write(b64decode(image))
+    # response = generate_image(theme, num_image=1, size=imgSize, output_format='b64_json')
+    # prefix = 'demo'
+    # for indx, image in enumerate(response['images']):
+    #     with open(f'{prefix}_{indx}.jpg', 'wb') as f:
+    #         f.write(b64decode(image))

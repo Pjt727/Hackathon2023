@@ -1,5 +1,8 @@
+//Creates background
 const canvas = document.getElementById('myCanvas');
-const player = new Player(0, 0, '/static/game_assets/MainCharacter.png', canvas);
+//puts player on screen
+const player = new Player(450, 450, '/static/game_assets/MainCharacter.png', canvas);
+//puts enemy on screen
 const enemy = new Enemy(0, 0, '/static/game_assets/Enemy.png', canvas);
 const context = canvas.getContext('2d');
 
@@ -36,6 +39,7 @@ function gameLoop() {
   player.draw();
 
   //Draw the enemy at its new position
+  enemy.move();
   enemy.draw()
 
   // Request another animation frame to continue the game loop

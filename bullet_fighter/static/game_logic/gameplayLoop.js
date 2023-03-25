@@ -8,6 +8,9 @@ enemyList.push(new Enemy(0, 0, '/static/game_assets/Enemy.png', canvas));
 console.log(enemyList);
 const context = canvas.getContext('2d');
 
+let lives = 3;
+const itemList = [];
+
 const base_image = new Image();
 base_image.src = canvas.getAttribute("image");
 base_image.onload = function() {
@@ -47,7 +50,13 @@ function gameLoop() {
   }
 
   if(detectEnemyCollision(player, enemyList)){
-    console.log("COLLIDED!!!!")
+    console.log("COLLIDED!!!!");
+    lives--;
+  }
+
+  if(detectItemCollision(player, itemList)){
+    console.log("Life Gain");
+    lives++;
   }
 
   // Request another animation frame to continue the game loop

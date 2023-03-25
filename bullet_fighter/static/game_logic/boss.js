@@ -16,7 +16,7 @@ class Boss {
     }
   
     draw() {
-      this.ctx.drawImage(this.image, this.x, this.y, 100, 100);
+      this.ctx.drawImage(this.image, this.x, this.y, 150, 150);
     }
 
     move() {

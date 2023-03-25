@@ -18,7 +18,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from authLoginRegister.views import register, login, logout
-from game.views import play
+from game.views import play, receiveScore
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +31,6 @@ urlpatterns = [
     
     # game views
     path('play/<int:level>/<int:id>/', play, name='play'),
+
+    path('receiveScore/', receiveScore, name='receiveScore'),
 ]

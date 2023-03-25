@@ -8,9 +8,9 @@
 <canvas id="myCanvas" width="500" height="500" image="{{ background }}"></canvas>
 
 
-<form action="{% url 'request_submit' %}" method="POST">
+<form action="{% url 'receiveScore' %}" method="POST">
     {% csrf_token %}
-    
+
     <input type="submit" name="action" value="Submit High Score" data-value="submit" class="btn btn-outline-success"></input>
 </form>
 {% endblock %}

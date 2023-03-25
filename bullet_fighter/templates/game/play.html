@@ -1,6 +1,7 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load static %}
 
 {% block title %}Play{% endblock %}
 {% block content %}
-
+<img src="{% static 'game_assets/square.png' %}" height="50" width="50">
 {% endblock %}
+{% block scripts %} <script src="{% static 'game_logic/player.js' %}"></script> {% endblock %}

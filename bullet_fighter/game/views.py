@@ -4,7 +4,7 @@ from .forms import Background
 from image_generator import imageGen
 from django.templatetags.static import static
 
-def play(request: HttpRequest, level: int, id:int):
+def play(request: HttpRequest, level: int, id:int) -> HttpRequest:
     background = static("game_assets/DefBackground.png")
     if request.method == "POST":
 
@@ -16,3 +16,7 @@ def play(request: HttpRequest, level: int, id:int):
     themeForm = Background()
     
     return render(request, "play.html", context={'level': level, 'id': id, 'themeForm': themeForm, 'background': background})
+
+def receiveScore(request:HttpRequest):
+    
+    return {}

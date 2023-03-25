@@ -4,7 +4,7 @@ from .forms import Background
 from image_generator import imageGen
 
 def play(request: HttpRequest, level: int, id:int):
-    
+    background = None
     if request.method == "POST":
 
         themeForm=Background(request.POST)
@@ -13,5 +13,5 @@ def play(request: HttpRequest, level: int, id:int):
             background = imageGen.callImageGenerator(theme)
     
     themeForm = Background()
-
+    
     return render(request, "play.html", context={'level': level, 'id': id, 'themeForm': themeForm, 'background': background})

@@ -11,9 +11,9 @@ function detectEnemyCollision(player, enemyList) {
 function detectItemCollision(player, itemList) {
     for (let i = 0; i < itemList.length; i++) {
         if (((itemList[i].x >= player.x) && (itemList[i].x <= player.x + player.image.width)) && ((itemList[i].y >= player.y) && (itemList[i].y <= player.y + player.image.height))) {
-            return true;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
 

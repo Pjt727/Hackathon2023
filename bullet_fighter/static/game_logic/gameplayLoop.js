@@ -12,6 +12,7 @@ const context = canvas.getContext('2d');
 let lives = 3;
 const itemList = [];
 
+
 const base_image = new Image();
 base_image.src = canvas.getAttribute("image");
 base_image.onload = function() {
@@ -22,6 +23,10 @@ let pressedKeys = {};
 
 
 function gameLoop() {
+  if((Math.floor(Math.random() * 10000)) == 69){
+    itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas));
+  }
+
   // Clear the canvas before drawing the player
   context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -44,20 +49,29 @@ function gameLoop() {
   // Draw the player at its new position
   player.draw();
 
+  
+  if(detectEnemyCollision(player, enemyList)){
+    console.log("COLLIDED!!!!");
+    lives--;
+  }
+
   //Draw the enemy at its new position
   for(let i=0; i < enemyList.length; i++){
     enemyList[i].move();
     enemyList[i].draw();
   }
 
-  if(detectEnemyCollision(player, enemyList)){
-    console.log("COLLIDED!!!!");
-    lives--;
+  // hearts
+  let check = detectItemCollision(player, itemList);
+  if(check >= 0){
+    console.log("Life Gain");
+    itemList.pop(check);
+    lives++;
   }
 
-  if(detectItemCollision(player, itemList)){
-    console.log("Life Gain");
-    lives++;
+  for(let i=0; i < itemList.length; i++){
+    itemList[i].move();
+    itemList[i].draw();
   }
 
   // Request another animation frame to continue the game loop

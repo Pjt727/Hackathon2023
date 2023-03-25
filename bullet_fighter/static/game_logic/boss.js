@@ -10,20 +10,20 @@ class Boss {
         this.image.src = imageSrc;
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
-        this.moveSpeed = 2;
+        this.moveSpeed = 4;
         this.distanceMoved = 0;
         this.direction = 1; // Direction of movement: 1 = right, 2 = down, 3 = left, 4 = up
     }
   
     draw() {
-      this.ctx.drawImage(this.image, this.x, this.y, 150, 150);
+      this.ctx.drawImage(this.image, this.x, this.y, 200, 200);
     }
 
     move() {
       // Move the enemy in the current direction
       switch (this.direction) {
         case 1: // Move right
-          if (this.x < this.canvas.width - 50) {
+          if (this.x < this.canvas.width - 250) {
             this.x += this.moveSpeed;
             this.distanceMoved += this.moveSpeed;
           } else {
@@ -31,7 +31,7 @@ class Boss {
           }
           break;
         case 2: // Move down
-          if (this.y < this.canvas.height - 50) {
+          if (this.y < this.canvas.height - 250) {
             this.y += this.moveSpeed;
             this.distanceMoved += this.moveSpeed;
           } else {
@@ -57,7 +57,7 @@ class Boss {
       }
   
       // If the enemy has moved 200 pixels, change direction
-      if (this.distanceMoved >= 200) {
+      if (this.distanceMoved >= 300) {
         this.direction = Math.floor(Math.random() * 4) + 1;
         this.distanceMoved = 0;
       }

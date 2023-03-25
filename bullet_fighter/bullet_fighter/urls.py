@@ -15,7 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
+
+from authLoginRegister.views import register, login, logout
+from game.views import play
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='base.html'), name="index"),
+    
+    # auth views
+    path('register/', register, name='register'),
+    path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
+    
+    # game views
+    path('play/<int:level>/<int:id>/', play, name='play'),
 ]

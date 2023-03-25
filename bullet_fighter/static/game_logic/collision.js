@@ -10,7 +10,7 @@ class Collision {
 
     detectItemCollision(player, itemList) {
         for (i = 0; i < itemList.length(); i++) {
-            if (((itemList[i].x >= player.x) && (itemList[i].x <= player.x + player.image.width)) && ((itemList[i].y >= player.y) && (itemList[i].y <= player.y + player.image.height))))) {
+            if (((itemList[i].x >= player.x) && (itemList[i].x <= player.x + player.image.width)) && ((itemList[i].y >= player.y) && (itemList[i].y <= player.y + player.image.height))) {
                 return true;
             }
         }

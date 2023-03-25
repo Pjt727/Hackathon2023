@@ -7,6 +7,41 @@
 
 <canvas id="myCanvas" width="500" height="500" image="{{ background }}"></canvas>
 
+<div>
+   <img src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+   <img src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+   <img src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+</div>
+
+<head>
+    <style>
+      table {
+        position: absolute;
+        top: 50%;
+        right: 100px;
+        transform: translate(0, -50%);
+        border: 2px solid black;
+      }
+      td, th {
+        border: 1px solid black;
+      }
+    </style>
+</head>
+<body>
+<table>
+    <tr bgcolor="grey" align="center">
+        <th width="100">Name</th>
+        <th width="100">Highscores</th>
+    </tr>
+    <tr bgcolor="lightgrey" align="center">
+        <td width="100">User</td>
+        <td width="100">TimeHigh</td>
+    </tr>
+
+</table>
+
+</body>
+
 <div class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">

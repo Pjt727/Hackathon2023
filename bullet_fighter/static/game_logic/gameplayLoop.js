@@ -6,7 +6,7 @@ const player = new Player(450, 450, '/static/game_assets/MainCharacter.png', can
 const enemyList = [];
 enemyList.push(new Enemy(0, 0, '/static/game_assets/Enemy.png', canvas));
 enemyList.push(new FollowingEnemy(0, 100, '/static/game_assets/Dog.png', canvas));
-enemyList.push(new Boss(100, 100, '/static/game_assets/Boss.png', canvas));
+enemyList.push(new Boss(100, 100, '/static/game_assets/BossNew.png', canvas));
 console.log(enemyList);
 const context = canvas.getContext('2d');
 let canCollideEnemy = true;

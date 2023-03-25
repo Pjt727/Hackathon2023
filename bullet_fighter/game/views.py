@@ -2,9 +2,10 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from .forms import Background
 from image_generator import imageGen
+from django.templatetags.static import static
 
 def play(request: HttpRequest, level: int, id:int):
-    background = None
+    background = static("game_assets/DefBackground.png")
     if request.method == "POST":
 
         themeForm=Background(request.POST)

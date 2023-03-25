@@ -10,7 +10,7 @@ class FollowingEnemy {
         this.image.src = imageSrc;
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
-        this.moveSpeed = 3;
+        this.moveSpeed = 1;
         this.player = player; 
         
     }

@@ -2,6 +2,19 @@
 
 {% block title %}Play{% endblock %}
 {% block content %}
-<img src="{% static 'game_assets/square.png' %}" height="50" width="50">
+
+<canvas id="myCanvas" width="500" height="500"></canvas>
+
+<img id="square" src="{% static 'game_assets/square.png' %}" height="50" width="50">
+<style> 
+#square {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 50px;
+     height: 50px;
+}
+</style>
 {% endblock %}
+
 {% block scripts %} <script src="{% static 'game_logic/player.js' %}"></script> {% endblock %}

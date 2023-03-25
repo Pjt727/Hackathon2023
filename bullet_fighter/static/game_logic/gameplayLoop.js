@@ -3,7 +3,9 @@ const canvas = document.getElementById('myCanvas');
 //puts player on screen
 const player = new Player(450, 450, '/static/game_assets/MainCharacter.png', canvas);
 //puts enemy on screen
-const enemy = new Enemy(0, 0, '/static/game_assets/Enemy.png', canvas);
+const enemyList = [];
+enemyList.push(new Enemy(0, 0, '/static/game_assets/Enemy.png', canvas));
+console.log(enemyList);
 const context = canvas.getContext('2d');
 
 const base_image = new Image();
@@ -39,8 +41,14 @@ function gameLoop() {
   player.draw();
 
   //Draw the enemy at its new position
-  enemy.move();
-  enemy.draw()
+  for(let i=0; i < enemyList.length; i++){
+    enemyList[i].move();
+    enemyList[i].draw();
+  }
+
+  if(detectEnemyCollision(player, enemyList)){
+    console.log("COLLIDED!!!!")
+  }
 
   // Request another animation frame to continue the game loop
   window.requestAnimationFrame(gameLoop);

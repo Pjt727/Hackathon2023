@@ -41,12 +41,11 @@ setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png
 setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas)), 60000);
 function gameLoop() {
   let newNow = new Date();
-  let seconds = newNow.getSeconds() - now.getSeconds();
-  if(seconds < 0){
-    seconds = seconds + 60;
+  let diffOfSeconds = Math.floor((newNow.getTime() - now.getTime())/1000);
+  timer.innerHTML = Math.floor(diffOfSeconds/60) + ":" + (('0' + (diffOfSeconds % 60)).slice(-2))
+  if(lives==0){
+    return;
   }
-  timer.innerHTML = (newNow.getMinutes() - now.getMinutes()) + ":" + (('0' + seconds).slice(-2))
-  
 
   if((Math.floor(Math.random() * 5000)) == 69){
     itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas));

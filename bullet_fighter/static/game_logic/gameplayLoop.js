@@ -1,5 +1,8 @@
 //Creates background
 const canvas = document.getElementById('myCanvas');
+const now = new Date();
+const timer = document.getElementById('timer');
+timer.innerHTML = "0:00"
 //puts player on screen
 const player = new Player(450, 450, '/static/game_assets/MainCharacter.png', canvas);
 //puts enemy on screen
@@ -32,6 +35,10 @@ let pressedKeys = {};
 
 
 function gameLoop() {
+  let newNow = new Date();
+  timer.innerHTML = (newNow.getMinutes() - now.getMinutes()) + ":" + (('0' + (newNow.getSeconds() - now.getSeconds())).slice(-2))
+  
+
   if((Math.floor(Math.random() * 10000)) == 69){
     itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas));
   }

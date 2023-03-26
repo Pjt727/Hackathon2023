@@ -15,7 +15,7 @@ console.log(enemyList);
 const context = canvas.getContext('2d');
 let canCollideEnemy = true;
 
-let lives = 3;
+let lives = 6;
 const itemList = [];
 
 
@@ -33,13 +33,22 @@ player_hurt.onload = function(x, y) {
 
 let pressedKeys = {};
 
-
+setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas)), 10000);
+setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas)), 20000);
+setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas)), 30000);
+setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas)), 40000);
+setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas)), 50000);
+setTimeout(() =>itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas)), 60000);
 function gameLoop() {
   let newNow = new Date();
-  timer.innerHTML = (newNow.getMinutes() - now.getMinutes()) + ":" + (('0' + (newNow.getSeconds() - now.getSeconds())).slice(-2))
+  let seconds = newNow.getSeconds() - now.getSeconds();
+  if(seconds < 0){
+    seconds = seconds + 60;
+  }
+  timer.innerHTML = (newNow.getMinutes() - now.getMinutes()) + ":" + (('0' + seconds).slice(-2))
   
 
-  if((Math.floor(Math.random() * 10000)) == 69){
+  if((Math.floor(Math.random() * 5000)) == 69){
     itemList.push(new Heart(225, 225, '/static/game_assets/Heart.png', canvas));
   }
 
@@ -72,6 +81,7 @@ function gameLoop() {
     console.log("COLLIDED!!!!");
     canCollideEnemy = false;
     setTimeout( ()=>canCollideEnemy=true, 1000);
+    document.getElementById("life" + lives).remove();
     lives--;
   }
 
@@ -87,6 +97,15 @@ function gameLoop() {
     console.log("Life Gain");
     itemList.pop(check);
     lives++;
+    let newParagraph = document.createElement("img");
+    newParagraph.setAttribute("id", "life" + lives);
+    newParagraph.setAttribute("src", "/static/game_assets/Heart.png");
+    newParagraph.setAttribute("width", "50");
+    newParagraph.setAttribute("height", "50");
+
+    
+    let lifeContainer = document.getElementById("lifeContainer");
+    lifeContainer.appendChild(newParagraph)
   }
 
   for(let i=0; i < itemList.length; i++){

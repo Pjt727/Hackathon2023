@@ -7,10 +7,13 @@
 
 <canvas id="myCanvas" width="500" height="500" image="{{ background }}"></canvas>
 
-<div>
-   <img src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
-   <img src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
-   <img src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+<div id="lifeContainer">
+   <img id="life1" src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+   <img id="life2" src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+   <img id="life3" src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+   <img id="life4" src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+   <img id="life5" src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
+   <img id="life6" src="{% static 'game_assets/Heart.png' %}" width="50" height="50">
 </div>
 
 <div id="timer" class="timer"> </div>

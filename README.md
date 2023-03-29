@@ -11,3 +11,6 @@
 - set up the database (cd into bulletFighter)
 1. 'python manage.py makemigrations'
 2. 'python manage.py migrate'
+
+- set up the openai api key (env must be configured first)
+1. $env:OPENAI_API_KEY="SECRET_KEY"

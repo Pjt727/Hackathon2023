@@ -4,6 +4,7 @@ from base64 import b64decode
 import webbrowser
 import openai
 from openai.error import InvalidRequestError
+import os
 
 def generate_image(prompt, num_image, size, output_format='url'):
     """
@@ -33,11 +34,9 @@ def generate_image(prompt, num_image, size, output_format='url'):
 
 def callImageGenerator(theme, imgSize="1024x1024"):
     theme += " themed top down video game map" 
-    config = configparser.ConfigParser()
-    #config.read('credential.ini')
-    #API_KEY = config['openai']['APIKEY']
 
-    openai.api_key = "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"
+    # you will need to make sure that you have the assigned
+    openai.api_key = os.getenv('OPENAI_API_KEY')
 
     # SIZES = ('1024x1024', '512x512', '256x256')
 

@@ -55,21 +55,9 @@
      // Clear the canvas before drawing the player
      context.clearRect(0, 0, canvas.width, canvas.height);
 
-     context.drawImage(base_image, 0, 0, 500, 500);
+     context.drawImage(base_image, 0, 0, canvas.width, canvas.height);
 
-     // Move the player based on which arrow key is pressed
-     if (keys['ArrowUp']) {
-         player.moveUp();
-     }
-     if (keys['ArrowDown']) {
-         player.moveDown();
-     }
-     if (keys['ArrowLeft']) {
-         player.moveLeft();
-     }
-     if (keys['ArrowRight']) {
-         player.moveRight();
-     }
+     
 
      // Draw the player at its new position
      player.draw();
@@ -116,15 +104,6 @@
      // Request another animation frame to continue the game loop
      window.requestAnimationFrame(gameLoop);
  }
-
- // Listen for key presses and update the `keys` object
- const keys = {};
- document.addEventListener('keydown', (event) => {
-     keys[event.code] = true;
- });
- document.addEventListener('keyup', (event) => {
-     keys[event.code] = false;
- });
 
 
  // Start the game loop

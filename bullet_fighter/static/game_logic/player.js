@@ -1,43 +1,69 @@
 class Player {
-    constructor(x, y, imageSrc, canvas) {
-        this.x = x;
-        this.y = y;
-        this.image = new Image();
-        this.image.onload = () => {
-          this.image.width = 50;
-          this.image.height = 50;
-        };
-        this.image.src = imageSrc;
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.moveSpeed = 5;
+    constructor(entity_display) {
+      this.entity_display = entity_display;
+      this.enemy_collisions = new InstanceMember1WayCollision(entity_display, gruntEnemies);
+      this.keys = {};
+      document.addEventListener('keydown', this.handleKeyDown.bind(this));
+      document.addEventListener('keyup', this.handleKeyUp.bind(this));
+      this.speed = 3;
+    }
+
+    tick(){
+      return;
+    }
+
+    handleKeyDown(event) {
+      this.keys[event.code] = true;
     }
   
-    draw() {
-      this.ctx.drawImage(this.image, this.x, this.y, 50, 50);
+    handleKeyUp(event) {
+      this.keys[event.code] = false;
     }
-  
-    moveUp() {
-      if (this.y > 0) {
-        this.y -= this.moveSpeed;
+
+    move(){
+      let dx = 0;
+      let dy = 0;
+      let diagonal_factor = 1; // no diagonal factor
+      
+      // logical xOR of right,left AND logical xOR of up,down
+      if((keys['ArrowLeft'] ? !keys['ArrowRight'] : keys['ArrowRight'])
+       && (keys['ArrowUp'] ? !keys['ArrowDown'] : keys['ArrowDown'])){
+        diagonal_factor= Math.SQRT2 / 2; // yes diagonal factor
+      }
+      if (keys['ArrowLeft']) { dx += this.speed * diagonal_factor;}
+      if (keys['ArrowRight']) {dx -= this.speed * diagonal_factor;}
+      if (keys['ArrowUp']) {dy += this.speed * diagonal_factor;}
+      if (keys['ArrowDown']) {dy -= this.speed * diagonal_factor;}
+
+      // between the x bounds
+      if((this.entity_display.x >= 0) && 
+      ((this.entity_display.x + this.entity_display.image.width) <= this.entity_display.canvas.width)){
+          this.entity_display.x += dx;
+      }
+      // move the display to the very edge
+      else if(this.entity_display.x + dx < 0){
+          this.entity_display.x = 0;
+      }
+      else{
+          this.entity_display.x = this.entity_display.image.width;
+      }
+      
+      // between the y bounds
+      if((this.entity_display.y >= 0) && 
+      ((this.entity_display.y + this.entity_display.image.height) <= this.entity_display.canvas.height)){
+          this.entity_display.y += dy;
+      }
+      // move the display to the very edge
+      else if(this.entity_display.y + dy < 0){
+          this.entity_display.y = 0;
+      }
+      else{
+          this.entity_display.y = this.entity_display.image.height;
       }
     }
-  
-    moveDown() {
-      if (this.y < this.canvas.height - this.image.height) {
-        this.y += this.moveSpeed;
-      }
+
+    cleanup(){
+      document.removeEventListener('keydown', this.handleKeyDown.bind(this));
+      document.removeEventListener('keyup', this.handleKeyUp.bind(this));
     }
-  
-    moveLeft() {
-      if (this.x > 0) {
-        this.x -= this.moveSpeed;
-      }
-    }
-  
-    moveRight() {
-      if (this.x < this.canvas.width - this.image.width) {
-        this.x += this.moveSpeed;
-      }
-    }
-  }
+}

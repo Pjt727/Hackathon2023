@@ -5,19 +5,25 @@ class Player {
         this.lives = lives;
         this.speed = speed;
         this.keys = {};
+        this.can_collide = false;
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
         document.addEventListener('keyup', this.handleKeyUp.bind(this));
 
     }
 
-    tick() {
-        return;
+    heartDetection(){
+        for(let heart of Heart.hearts){
+            if(detectCollision(this.entity_display, heart.movement.entity_display)){
+                heart.cleanup();
+                this.lives += 1;
+            }
+        }
     }
-
     enemyDetection() {
         for (let gruntEnemy of GruntEnemy.enemies) {
-            if (detectCollision(this.entity_display, gruntEnemy.entity_display)) {
+            if (detectCollision(this.entity_display, gruntEnemy.movement.entity_display)) {
                 this.lives -= gruntEnemy.damage;
+                return;
             }
         }
     }
@@ -36,14 +42,14 @@ class Player {
         let diagonal_factor = 1; // no diagonal factor
 
         // logical xOR of right,left AND logical xOR of up,down
-        if ((keys['ArrowLeft'] ? !keys['ArrowRight'] : keys['ArrowRight']) &&
-            (keys['ArrowUp'] ? !keys['ArrowDown'] : keys['ArrowDown'])) {
+        if ((this.keys['ArrowLeft'] ? !this.keys['ArrowRight'] : this.keys['ArrowRight']) &&
+            (this.keys['ArrowUp'] ? !this.keys['ArrowDown'] : this.keys['ArrowDown'])) {
             diagonal_factor = Math.SQRT2 / 2; // yes diagonal factor
         }
-        if (keys['ArrowLeft']) { dx += this.speed * diagonal_factor; }
-        if (keys['ArrowRight']) { dx -= this.speed * diagonal_factor; }
-        if (keys['ArrowUp']) { dy += this.speed * diagonal_factor; }
-        if (keys['ArrowDown']) { dy -= this.speed * diagonal_factor; }
+        if (this.keys['ArrowLeft']) { dx += this.speed * diagonal_factor; }
+        if (this.keys['ArrowRight']) { dx -= this.speed * diagonal_factor; }
+        if (this.keys['ArrowUp']) { dy += this.speed * diagonal_factor; }
+        if (this.keys['ArrowDown']) { dy -= this.speed * diagonal_factor; }
 
         // between the x bounds
         if ((this.entity_display.x >= 0) &&

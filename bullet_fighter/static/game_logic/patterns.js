@@ -73,7 +73,7 @@ class NPCMovement {
 
 
 // for the patterns "this" is the NPCMovement instance
-let knightPatterns = (
+let randomDirection = (
     // moving right
     () => {
         const dx = 3;
@@ -100,7 +100,7 @@ let knightPatterns = (
     }
 )
 
-let foxPatterns = (
+let following = (
     // following player
     () => {
         const toPlayerX = player.x - this.entity_display.x;

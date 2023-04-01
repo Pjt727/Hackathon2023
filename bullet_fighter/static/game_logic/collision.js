@@ -24,6 +24,12 @@ function detectItemCollision(player, itemList) {
     return -1;
 }
 
+/**
+ * 
+ * @param {EntityDisplay} entity1 
+ * @param {EntityDisplay} entity2 
+ * @returns {boolean}
+ */
 function detectCollision(entity1, entity2) {
     // getting the corners of the first entity
     let entity1x1 = entity1.x;
@@ -46,16 +52,16 @@ function detectCollision(entity1, entity2) {
 }
 
 // may want to come back to this implementation to say which entities 
-class InstanceMember1WayCollision{
-    constructor(entity_display, entity_displays_to_collide_with){
+class InstanceMember1WayCollision {
+    constructor(entity_display, entity_displays_to_collide_with) {
         this.entity_display = entity_display;
         this.entity_displays_to_collide_with = entity_displays_to_collide_with;
         this.collided = false; // whether the instance collided with something last check
     }
 
-    checkCollision(){
-        for(let i=0; i < this.entity_displays_to_collide_with.length; i++){
-            if(detectCollision(this.entity_display, this.entity_displays_to_collide_with[i])){
+    checkCollision() {
+        for (let i = 0; i < this.entity_displays_to_collide_with.length; i++) {
+            if (detectCollision(this.entity_display, this.entity_displays_to_collide_with[i])) {
                 this.collided = true;
                 return;
             }
@@ -67,26 +73,26 @@ class InstanceMember1WayCollision{
 class EveryMember2WayCollision {
     static sprites = [];
 
-    constructor(entity_display, type){
-      this.entity_display = entity_display;
-      // array of entities collided with last detection cycle
-      this.collidedWith = [];
-      this.type = type;
-      MovingCollidingSprite.sprites.push(this);
+    constructor(entity_display, type) {
+        this.entity_display = entity_display;
+        // array of entities collided with last detection cycle
+        this.collidedWith = [];
+        this.type = type;
+        MovingCollidingSprite.sprites.push(this);
     }
 
-    static checkCollision(){
-        for (let i = 0; i < this.sprites.length; i++){
+    static checkCollision() {
+        for (let i = 0; i < this.sprites.length; i++) {
             sprites[i].collidedWith = [];
         }
 
         for (let i = 0; i < this.sprites.length - 1; i++) {
             for (let j = i + 1; j < this.sprites.length; j++) {
                 if (detectCollision(sprites[i].entity_display, sprites[j].entity_display)) {
-                sprites[i].collidedWith.push(sprites[j]);
-                sprites[j].collidedWith.push(sprites[i]);
+                    sprites[i].collidedWith.push(sprites[j]);
+                    sprites[j].collidedWith.push(sprites[i]);
                 }
             }
         }
     }
-  }
+}
